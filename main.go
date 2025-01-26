@@ -8,7 +8,6 @@ import (
 	"path"
 	"regexp"
 	"strings"
-	"unicode"
 
 	"github.com/komisarzryba/gitgud/config"
 )
@@ -75,22 +74,39 @@ func getRepoRoot() string {
 }
 
 func commitMsg() {
-	// var commitMsg string
-	if len(os.Args) >= 3 {
-		commitMsgFilePath := os.Args[2]
-		commitMsgFile, err := os.Open(commitMsgFilePath)
-		if err != nil {
-			logger.Fatalf("Could not open commit message file: %v", err)
-		}
-		defer commitMsgFile.Close()
-		commitMsgBytes, err := io.ReadAll(commitMsgFile)
-		if err != nil {
-			logger.Fatalf("Could not read commit message file: %v", err)
-		}
-		if len(commitMsgBytes) > 0 && !unicode.IsUpper(rune(commitMsgBytes[0])) {
-			logger.Fatal("Commit message must start with a capital letter")
-		}
-	} else {
+	commitMsg := getCommitMsg()
+	commitMsgPattern := getCommitMsgPattern()
+
+	regex := regexp.MustCompile(commitMsgPattern)
+	if !regex.MatchString(commitMsg) {
+		logger.Printf("Commit message: %s\n", commitMsg)
+		logger.Fatal("Commit message does not match the required pattern")
+	}
+}
+
+func getCommitMsg() string {
+	if len(os.Args) < 3 {
 		logger.Fatal("No commit message file provided")
 	}
+
+	commitMsgFilePath := os.Args[2]
+	commitMsgFile, err := os.Open(commitMsgFilePath)
+	if err != nil {
+		logger.Fatalf("Could not open commit message file: %v", err)
+	}
+	defer commitMsgFile.Close()
+	commitMsgBytes, err := io.ReadAll(commitMsgFile)
+	if err != nil {
+		logger.Fatalf("Could not read commit message file: %v", err)
+	}
+	return string(commitMsgBytes)
+}
+
+func getCommitMsgPattern() string {
+	repoRoot := getRepoRoot()
+	config, err := config.NewConfigFromFile(path.Join(repoRoot, ".gitgud"))
+	if err != nil {
+		logger.Fatalf("Could not read .gitgud file: %v", err)
+	}
+	return config.CommitMsgPattern
 }

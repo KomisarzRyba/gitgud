@@ -4,6 +4,7 @@ import "github.com/BurntSushi/toml"
 
 type Config struct {
 	BranchNamePattern string `toml:"branch_name_pattern"`
+	CommitMsgPattern  string `toml:"commit_msg_pattern"`
 }
 
 func NewConfigFromFile(path string) (*Config, error) {
