@@ -1,0 +1,6 @@
+-   id: branch-name
+    name: Enforce branch name pattern
+    description: 'Enforce branch name pattern'
+    entry: gitgud
+    args: ["branch-name"]
+    language: golang
