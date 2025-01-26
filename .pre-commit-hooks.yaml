@@ -1,15 +1,16 @@
 -   id: branch-name
-    name: Enforce branch name pattern
-    description: 'Enforce branch name pattern'
+    name: enforce branch name pattern
+    description: 'enforce branch name pattern'
     entry: gitgud
     always_run: true
     args: ["branch-name"]
     language: golang
 
 -   id: commit-msg
-    name: Enforce commit message format
-    description: 'Enforce commit message format'
+    name: enforce commit message format
+    description: 'enforce commit message format'
     entry: gitgud
     always_run: true
+    stages: [commit-msg]
     args: ["commit-msg"]
     language: golang
