@@ -1,6 +1,6 @@
 # GitGud Pre-Commit Hooks
 
-GitGud is a lightweight Git pre-commit hook written in Go to enforce branch naming conventions and commit message formats across your repository.
+Lightweight pre-commit hooks written in Go to enforce branch naming conventions and commit message formats across your repository.
 
 ## Features
 
