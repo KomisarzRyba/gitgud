@@ -34,7 +34,7 @@ func branchName() {
 	regex := regexp.MustCompile(bNamePattern)
 	if !regex.MatchString(bName) {
 		logger.Printf("Branch name: %s\n", bName)
-		logger.Fatal("Branch name does not match the required pattern")
+		logger.Fatalf("Branch name does not match the required pattern: %s", bNamePattern)
 	}
 }
 
