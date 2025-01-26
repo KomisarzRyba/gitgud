@@ -49,18 +49,12 @@ func getCurBranchName() string {
 
 // Get the branch name pattern from the command line arguments or .gitgud file
 func getBranchNamePattern() string {
-	var bNamePattern string
-	if len(os.Args) >= 3 {
-		bNamePattern = os.Args[2]
-	} else {
-		repoRoot := getRepoRoot()
-		config, err := config.NewConfigFromFile(path.Join(repoRoot, ".gitgud"))
-		if err != nil {
-			logger.Fatalf("Could not read .gitgud file: %v", err)
-		}
-		bNamePattern = config.BranchNamePattern
+	repoRoot := getRepoRoot()
+	config, err := config.NewConfigFromFile(path.Join(repoRoot, ".gitgud"))
+	if err != nil {
+		logger.Fatalf("Could not read .gitgud file: %v", err)
 	}
-	return bNamePattern
+	return config.BranchNamePattern
 }
 
 // Get the repository root path
