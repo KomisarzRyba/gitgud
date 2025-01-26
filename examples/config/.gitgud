@@ -1,0 +1,7 @@
+# branch name starts with a capital letter, followed by a forward slash, and then a series of lowercase letters and numbers separated by hyphens
+
+branch_name_pattern = "^[A-Z][a-zA-Z0-9]*/[a-z0-9]+(-[a-z0-9]+)*$"
+
+# commit message starts with a capital letter, followed by a series of letters, numbers, spaces, and commas, and ends with a letter or number
+
+commit_msg_pattern = "^[A-Z][a-zA-Z0-9 ,]*[a-zA-Z0-9]$"
