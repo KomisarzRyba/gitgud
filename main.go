@@ -73,6 +73,7 @@ func getRepoRoot() string {
 
 }
 
+// Check if the commit message matches the required pattern
 func commitMsg() {
 	commitMsg := getCommitMsg()
 	commitMsgPattern := getCommitMsgPattern()
@@ -84,6 +85,7 @@ func commitMsg() {
 	}
 }
 
+// Get the commit message from the command line arguments
 func getCommitMsg() string {
 	if len(os.Args) < 3 {
 		logger.Fatal("No commit message file provided")
@@ -102,6 +104,7 @@ func getCommitMsg() string {
 	return strings.TrimSpace(string(commitMsgBytes))
 }
 
+// Get the commit message pattern from the .gitgud file
 func getCommitMsgPattern() string {
 	repoRoot := getRepoRoot()
 	config, err := config.NewConfigFromFile(path.Join(repoRoot, ".gitgud"))
