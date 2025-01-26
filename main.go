@@ -83,7 +83,7 @@ func commitMsg() {
 		}
 		defer commitMsgFile.Close()
 		commitMsgBytes, err := io.ReadAll(commitMsgFile)
-		logger.Printf("Commit message: %s\n", string(commitMsgBytes))
+		logger.Fatalf("Commit message: %s\n", string(commitMsgBytes))
 	} else {
 		logger.Fatal("No commit message file provided")
 	}
