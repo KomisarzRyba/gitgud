@@ -62,6 +62,7 @@ func getBranchNamePattern() string {
 	return bNamePattern
 }
 
+// Get the repository root path
 func getRepoRoot() string {
 	output, err := exec.Command("git", "rev-parse", "--show-toplevel").Output()
 	if err != nil {
