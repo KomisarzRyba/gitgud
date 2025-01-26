@@ -99,7 +99,7 @@ func getCommitMsg() string {
 	if err != nil {
 		logger.Fatalf("Could not read commit message file: %v", err)
 	}
-	return string(commitMsgBytes)
+	return strings.TrimSpace(string(commitMsgBytes))
 }
 
 func getCommitMsgPattern() string {
