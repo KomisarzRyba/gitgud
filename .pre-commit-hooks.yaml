@@ -5,3 +5,11 @@
     always_run: true
     args: ["branch-name"]
     language: golang
+
+-   id: commit-msg
+    name: Enforce commit message format
+    description: 'Enforce commit message format'
+    entry: gitgud
+    always_run: true
+    args: ["commit-msg"]
+    language: golang

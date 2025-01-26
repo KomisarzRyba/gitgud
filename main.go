@@ -1,6 +1,7 @@
 package main
 
 import (
+	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -22,7 +23,7 @@ func main() {
 	case "branch-name":
 		branchName()
 	case "commit-msg":
-		logger.Fatal("Not implemented")
+		commitMsg()
 	}
 }
 
@@ -70,4 +71,20 @@ func getRepoRoot() string {
 	}
 	return strings.TrimSpace(string(output))
 
+}
+
+func commitMsg() {
+	// var commitMsg string
+	if len(os.Args) >= 3 {
+		commitMsgFilePath := os.Args[2]
+		commitMsgFile, err := os.Open(commitMsgFilePath)
+		if err != nil {
+			logger.Fatalf("Could not open commit message file: %v", err)
+		}
+		defer commitMsgFile.Close()
+		commitMsgBytes, err := io.ReadAll(commitMsgFile)
+		logger.Printf("Commit message: %s\n", string(commitMsgBytes))
+	} else {
+		logger.Fatal("No commit message file provided")
+	}
 }
