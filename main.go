@@ -80,7 +80,7 @@ func commitMsg() {
 	regex := regexp.MustCompile(commitMsgPattern)
 	if !regex.MatchString(commitMsg) {
 		logger.Printf("Commit message: %s\n", commitMsg)
-		logger.Fatal("Commit message does not match the required pattern")
+		logger.Fatalf("Commit message does not match the required pattern: %s", commitMsgPattern)
 	}
 }
 
