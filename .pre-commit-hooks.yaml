@@ -2,5 +2,6 @@
     name: Enforce branch name pattern
     description: 'Enforce branch name pattern'
     entry: gitgud
+    always_run: true
     args: ["branch-name"]
     language: golang
