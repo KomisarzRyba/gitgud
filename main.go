@@ -8,6 +8,7 @@ import (
 	"path"
 	"regexp"
 	"strings"
+	"unicode"
 
 	"github.com/komisarzryba/gitgud/config"
 )
@@ -86,7 +87,7 @@ func commitMsg() {
 		if err != nil {
 			logger.Fatalf("Could not read commit message file: %v", err)
 		}
-		if strings.ToUpper(string(commitMsgBytes))[0] != string(commitMsgBytes)[0] {
+		if len(commitMsgBytes) > 0 && !unicode.IsUpper(rune(commitMsgBytes[0])) {
 			logger.Fatal("Commit message must start with a capital letter")
 		}
 	} else {
