@@ -83,7 +83,12 @@ func commitMsg() {
 		}
 		defer commitMsgFile.Close()
 		commitMsgBytes, err := io.ReadAll(commitMsgFile)
-		logger.Fatalf("Commit message: %s\n", string(commitMsgBytes))
+		if err != nil {
+			logger.Fatalf("Could not read commit message file: %v", err)
+		}
+		if strings.ToUpper(string(commitMsgBytes))[0] != string(commitMsgBytes)[0] {
+			logger.Fatal("Commit message must start with a capital letter")
+		}
 	} else {
 		logger.Fatal("No commit message file provided")
 	}
